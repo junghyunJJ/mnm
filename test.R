@@ -55,7 +55,7 @@ gemma <- fread("mouse100.assoc.txt") # results from gemma
 gemma %>%
     filter(rs %in% sel_snps) %>%
     arrange(p_wald)
-gemma %>% View
+
 # 5-2. run reverse multivariate (Canonical Correlation Analysis; CCA)
 vegan::CCorA(X = new_dat$new_y, Y = new_dat$new_x)
 
@@ -65,14 +65,8 @@ vegan::adonis2(new_dat$new_x ~ new_dat$new_y, method = "euclidean")
 # 5-3.  run reverse multivariate (mCPC Aschard et al, AJHG, 2014)
 mCPC(y = new_dat$new_x, g = new_dat$new_y)
 
-# 5-4. 
-# TBD
-# Bhat <- matrix(c(res_single$beta_1, res_single$beta_2), ncol = 2)
-# Shat <- matrix(c(res_single$betastderr_1, res_single$betastderr_2), ncol = 2)
-# data <- mashr::mash_set_data(Bhat, Shat)
-# U.pca <- mashr::cov_pca(data, 2)
-
-
-
-# U.ed = cov_ed(data, U.pca, subset=strong)
-# m.ed = mash(data, U.ed)
+# NOTE!! We need to check whether this approach is mathematically reasonable.
+# 5-4. susieR
+res_susie <- susieR::susie(y = new_dat$new_y, X = new_dat$new_x)
+coef(res_susie)[-1]
+res_susie$pip
