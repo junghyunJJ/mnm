@@ -45,11 +45,14 @@ solve(t(new_dat$new_x) %*% new_dat$new_x) %*% t(new_dat$new_x) %*% new_dat$new_y
 res_single <- single_anlaysis(new_dat$new_y, new_dat$new_x)
 res_single
 
+# 4-1. run single using multiple linear
+# NOTE!! the 4-1 is only for one SNP at this time
+lm(new_dat$new_y ~ new_dat$new_x - 1) %>% summary
 
 ######################################################################
 ### multivariate analysis ############################################
 ######################################################################
-
+# NOTE!! the multivariate analysis is only for one SNP at this time
 # 5-1. run multivariate (gemma)
 gemma <- fread("mouse100.assoc.txt") # results from gemma
 gemma %>%
