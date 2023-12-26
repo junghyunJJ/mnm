@@ -20,7 +20,8 @@ sel_idx <- match(sel_snps, geno$X1)
 g1 <- geno[c(sel_idx), -c(1:3)] # first 3 columns are SNP annotations!
 X <- t(as.matrix(g1))
 
-# # test for multiple snps
+# # test for multiple snp.
+# NOTE!! the resutls of multiple snps and single snp is the same.
 # sel_snps <- c("rs8275764", "rs6212654", "rs13477740")
 # sel_idx <- match(sel_snps, geno$X1)
 # g1 <- geno[c(sel_idx), -c(1:3)]
@@ -73,3 +74,4 @@ mCPC(y = new_dat$new_x, g = new_dat$new_y)
 res_susie <- susieR::susie(y = new_dat$new_y, X = new_dat$new_x)
 coef(res_susie)[-1]
 res_susie$pip
+res_susie$sets
